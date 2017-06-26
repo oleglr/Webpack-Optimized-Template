@@ -10,14 +10,17 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
 
+const METADATA = require('./configs/metadata-config');
+
 const config = {
 
-	entry: './src/js/index.js',
+	entry: './src/scripts/index.js',
 
 	output: {
 		publicPath: '/',
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'js/[name].bundle.js'
+		filename: 'js/[name].bundle.js',
+		sourceMapFilename: 'js/[file].map'
 	},
 
 	performance: {
@@ -29,7 +32,7 @@ const config = {
 	},
 
 	resolve: {
-		extensions: ['.js', '.jsx', '.sass', '.scss', '.html'],
+		extensions: ['.js', '.sass', '.scss', '.html'],
 		modules: [
 			'node_modules',
 		],
@@ -64,6 +67,7 @@ const config = {
 	},
 
 	module: {
+
 		rules: [
 			{
 				test: /\.js?$/,
@@ -86,20 +90,33 @@ const config = {
 				exclude: /node_modules/,
 				use: 'url-loader?limit=100&name=img/[name].[ext]'
 			},
+			{
+				test: /\.(woff|woff2|eot|ttf|svg)$/,
+				exclude: /node_modules/,
+				use: 'url-loader?limit=1024&name=fonts/[name].[ext]'
+			},
 		]
+
 	},
 
 	plugins: [
-
+		/**
+		 * @link https://github.com/webpack/extract-text-webpack-plugin
+		 */
 		new ExtractTextPlugin({
 			filename: 'css/style.[hash].css'
 		}),
 
+		/**
+		 * @link https://github.com/ampedandwired/html-webpack-plugin
+		 */
 		new HtmlWebpackPlugin({
-			title: 'Webpack-Optimized-Template',
-			description: 'Webpack-Optimized-Template',
-			baseUrl: '/',
+			title: METADATA.title,
+			description: METADATA.description,
+			baseUrl: METADATA.baseUrl,
+			metadata: METADATA,
 			template: './src/index.html.ejs',
+			chunksSortMode: 'dependency',
 			inject: 'body',
 			minify: {
 				removeComments: true,
@@ -115,13 +132,28 @@ const config = {
 			},
 		}),
 
+		/**
+		 * @link https://github.com/numical/script-ext-html-webpack-plugin
+		 */
+		new ScriptExtHtmlWebpackPlugin({
+			defaultAttribute: 'defer'
+		}),
+
 		new webpack.HotModuleReplacementPlugin(),
+
+		/**
+		 * @link https://github.com/AngularClass/angular2-webpack-starter/tree/master/config/html-elements-plugin
+		 */
+		new HtmlElementsWebpackPlugin({
+			headTags: require('./configs/head-config'),
+		}),
 
 		/**
 		 * @link https://www.npmjs.com/package/copy-webpack-plugin
 		 */
 		new CopyWebpackPlugin([
-			{ from: 'src/img', to: 'img' }
+			{ from: 'src/images', to: 'images' },
+			{ from: 'src/fonts', to: 'fonts' }
 		]),
 
 	]

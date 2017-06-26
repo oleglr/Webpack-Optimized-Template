@@ -2,13 +2,56 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+	<title><%= htmlWebpackPlugin.options.title %></title>
+	<meta name="description" content="<%= htmlWebpackPlugin.options.metadata.description %>">
+
+	<%= webpackConfig.htmlElements.headTags %>
+
+	<base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
 </head>
 <body>
 
-<h1>Hello World</h1>
+<div class="page_wrapper">
+
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-3">
+
+					<h1>TEST</h1>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae excepturi, quis cupiditate porro vitae harum explicabo,
+						aliquam labore commodi dolore, fugiat itaque necessitatibus quidem tempora esse velit qui odit doloribus.</p>
+
+				</div>
+
+				<div class="col-3">
+
+					<h1>TEST</h1>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae excepturi, quis cupiditate porro vitae harum explicabo,
+						aliquam labore commodi dolore, fugiat itaque necessitatibus quidem tempora esse velit qui odit doloribus.</p>
+
+				</div>
+
+				<div class="col-3">
+
+					<h1>TEST</h1>
+
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae excepturi, quis cupiditate porro vitae harum explicabo,
+						aliquam labore commodi dolore, fugiat itaque necessitatibus quidem tempora esse velit qui odit doloribus.</p>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
 
 </body>
 </html>
