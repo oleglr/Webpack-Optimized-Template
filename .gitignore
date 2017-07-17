@@ -418,4 +418,4 @@ resources/
 
 # Sprites
 /src/images/sprites/*
-/src/sass/helpers/_sprites.sass
+/src/styles/helpers/_sprites.sass

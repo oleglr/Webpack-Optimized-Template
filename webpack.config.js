@@ -136,7 +136,7 @@ const config = {
 		 * @link https://github.com/numical/script-ext-html-webpack-plugin
 		 */
 		new ScriptExtHtmlWebpackPlugin({
-			defaultAttribute: 'defer'
+			defaultAttribute: 'defer',
 		}),
 
 		new webpack.HotModuleReplacementPlugin(),
