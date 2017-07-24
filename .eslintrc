@@ -16,5 +16,14 @@
 		"browser": true,
 		"es6": true,
 		"node": false
+	},
+	"rules": {
+		"indent": [0, "tab"],
+		"no-tabs": 0,
+		"no-mixed-spaces-and-tabs": 0,
+		"no-var": 0,
+		"quotes": 1,
+		"semi": 0,
+		"no-console": 0
 	}
 }

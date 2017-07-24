@@ -18,12 +18,12 @@
     "url": "https://github.com/vorobyovkirill/Webpack-Optimized-Template/issues"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --progress --colors",
     "clean-install": "rimraf dist node_modules coverage && npm install && npm run build",
     "lint:css": "sass-lint --verbose",
-    "start": "webpack-dev-server",
-    "watch": "npm run start",
-    "rmrf": "rimraf dist coverage"
+    "start": "webpack-dev-server --progress --colors",
+    "watch": "npm run start --progress --colors",
+    "rmrf": "rimraf dist coverage --progress --colors"
   },
   "browserslist": [
     "> 1%",
@@ -51,7 +51,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.3",
     "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-config-airbnb-base": "^11.3.0",
     "eslint-plugin-chai-friendly": "^0.3.6",
     "eslint-plugin-import": "^2.7.0",
     "extract-text-webpack-plugin": "^2.1.2",
