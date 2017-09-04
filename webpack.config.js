@@ -4,11 +4,14 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlElementsWebpackPlugin = require('html-elements-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
+const ImageminPlugin = require('imagemin-webpack-plugin').default
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const METADATA = require('./configs/metadata-config');
 
@@ -20,7 +23,7 @@ const config = {
 		publicPath: '/',
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'js/[name].bundle.js',
-		sourceMapFilename: 'js/[file].map'
+		sourceMapFilename: 'js/[file].map',
 	},
 
 	performance: {
@@ -78,24 +81,24 @@ const config = {
 				test: /\.(sass|scss|css)$/,
 				use: ExtractTextPlugin.extract({
 					use: ['css-loader', 'sass-loader'],
-					fallback: 'style-loader'
+					fallback: 'style-loader',
 				})
 			},
 			{
 				test: /\.html$/,
-				use: 'html-loader'
+				use: 'html-loader',
 			},
 			{
 				test: /\.(jpg|jpeg|gif|png|svg)$/,
 				exclude: /node_modules/,
-				use: 'url-loader?limit=100&name=img/[name].[ext]'
+				use: 'url-loader?limit=100&name=img/[name].[ext]',
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|svg)$/,
 				exclude: /node_modules/,
-				use: 'url-loader?limit=1024&name=fonts/[name].[ext]'
+				use: 'url-loader?limit=1024&name=fonts/[name].[ext]',
 			},
-		]
+		],
 
 	},
 
@@ -104,7 +107,7 @@ const config = {
 		 * @link https://github.com/webpack/extract-text-webpack-plugin
 		 */
 		new ExtractTextPlugin({
-			filename: 'css/style.[hash].css'
+			filename: 'css/style.[hash].css',
 		}),
 
 		/**
@@ -128,7 +131,7 @@ const config = {
 				keepClosingSlash: true,
 				minifyJS: true,
 				minifyCSS: true,
-				minifyURLs: true
+				minifyURLs: true,
 			},
 		}),
 
@@ -153,10 +156,55 @@ const config = {
 		 */
 		new CopyWebpackPlugin([
 			{ from: 'src/images', to: 'images' },
-			{ from: 'src/fonts', to: 'fonts' }
+			{ from: 'src/fonts', to: 'fonts' },
 		]),
 
-	]
+		/**
+		 * @link https://www.npmjs.com/package/webpack-spritesmith
+		 */
+		new SpritesmithPlugin({
+			src: {
+				cwd: path.resolve(__dirname, 'src', 'icons/sprites_src'),
+				glob: '*.png',
+			},
+			target: {
+				image: path.resolve(__dirname, 'src', 'icons/sprites/sprite.[hash].png'),
+				css: path.resolve(__dirname, 'src', 'styles/helpers/_generated-sprites.sass'),
+			},
+			spritesmithOptions: {
+				algorithm: 'top-down',
+				padding: 10,
+			},
+			apiOptions: {
+				cssImageRef: '~sprite.[hash].png',
+			},
+		}),
+
+		/**
+		 * @link https://github.com/NMFR/optimize-css-assets-webpack-plugin
+		 */
+		new OptimizeCssAssetsPlugin(),
+
+		/**
+		 * @link https://github.com/Klathmon/imagemin-webpack-plugin
+		 */
+		new ImageminPlugin({
+			test: /\.(jpe?g|png|gif|svg)$/i,
+			pngquant: {
+				quality: '60-70',
+			},
+			optipng: {
+				optimizationLevel: 3,
+			},
+			gifsicle: {
+				optimizationLevel: 1,
+			},
+			jpegtran: {
+				progressive: true,
+			},
+		}),
+
+	],
 
 };
 
