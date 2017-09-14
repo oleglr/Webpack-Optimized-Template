@@ -4,18 +4,29 @@
   "description": "Webpack-Optimized-Template",
   "author": "Kirill Vorobiov",
   "license": "ISC",
-  "homepage": "https://github.com/vorobyovkirill/Webpack-Optimized-Template#readme",
-  "keywords": [],
+  "keywords": [
+    "sass",
+    "scss",
+    "bourbon",
+    "neat",
+    "starter",
+    "webpack",
+    "smacss",
+    "BrowserSync",
+    "Imagemin",
+    "Autoprefixer",
+    "normalize.css"
+  ],
   "engines": {
     "npm": ">4",
     "node": ">7"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vorobyovkirill/Webpack-Optimized-Template.git"
+    "url": "https://github.com/vorobiovkirill/Webpack-Optimized-Template.git"
   },
   "bugs": {
-    "url": "https://github.com/vorobyovkirill/Webpack-Optimized-Template/issues"
+    "url": "https://github.com/vorobiovkirill/Webpack-Optimized-Template/issues"
   },
   "scripts": {
     "build": "webpack --progress --colors",
