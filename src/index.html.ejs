@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -8,13 +9,16 @@
 	<title><%= htmlWebpackPlugin.options.title %></title>
 	<meta name="description" content="<%= htmlWebpackPlugin.options.metadata.description %>">
 
+	<% if (webpackConfig.htmlElements.headTags) { %>
 	<%= webpackConfig.htmlElements.headTags %>
+	<% } %>
 
 	<base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
 </head>
+
 <body>
 
-<div class="page_wrapper">
+	<div class="page_wrapper">
 
 		<div class="container">
 
@@ -54,4 +58,5 @@
 	</div>
 
 </body>
+
 </html>

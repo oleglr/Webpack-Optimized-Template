@@ -1,6 +1,6 @@
 # Webpack-Optimized-Template
 
-v1.2.0
+v1.3.0
 
 ![Webpack-Optimized-Template logo](http://todarman.com/wp-content/uploads/2017/06/PicsArt_06-22-12.52.50.jpg)
 
