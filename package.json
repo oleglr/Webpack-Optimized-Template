@@ -31,13 +31,13 @@
     "normalize.css"
   ],
   "scripts": {
-    "build:dev": "npm run clean:dist && ENV=dev webpack --config configs/webpack.dev.js --progress --profile",
-    "build:prod": "npm run clean:dist && ENV=prod webpack --config configs/webpack.prod.js --progress --profile --bail",
+    "build:dev": "npm run clean:dist && ENV=dev webpack --config config/webpack.dev.js --progress --profile",
+    "build:prod": "npm run clean:dist && ENV=prod webpack --config config/webpack.prod.js --progress --profile --bail",
     "build": "npm run build:dev",
-    "clean:dist": "rimraf dist node_modules coverage documentation",
-    "clean:install": "npm cache clean --force && npm run clean:dist && npm install",
+    "clean:dist": "rimraf dist",
+    "clean:install": "npm cache clean --force && rimraf dist node_modules coverage documentation && npm install",
     "lint:css": "sass-lint -c .sass-lint.yml './src/styles/**/*.sass' --verbose --no-exit",
-    "start:server": "webpack-dev-server --config configs/webpack.dev.js --progress --colors",
+    "start:server": "webpack-dev-server --config config/webpack.dev.js --progress --colors",
     "watch": "npm run start:server",
     "rimraf": "rimraf"
   },
