@@ -145,9 +145,9 @@ module.exports = (env) => {
 			 * @link https://webpack.github.io/docs/list-of-plugins.html#defineplugin
 			 */
 			new DefinePlugin({
-				'ENV': JSON.stringify(ENV),
+				ENV: JSON.stringify(ENV),
 				'process.env': {
-					'ENV': JSON.stringify(ENV),
+					ENV: JSON.stringify(ENV),
 				},
 			}),
 		],
